@@ -1,12 +1,12 @@
-# Author: Giraudo Anthony                     
-# 27 avril 2018
-# capteur_central.py
+# Authors: Anthony Giraudo, Kari Hichma, Kilian Mac Donald, Louise Marinho
+# 23 mars 2018
+# main_loop_simulateur.py
 
 import pygame
 from pygame.locals import *
 pygame.init()
 from conversions import *
-from classes_capteur_central import *
+from classes_simulateur import *
 import time
 
 # images
@@ -18,19 +18,16 @@ dimensions_image_capteur = (49, 49)
 # parametres
 largeur_chemin = 40
 l = 4 * largeur_chemin # distance entre les deux roues en pixels
-
 d = (12 * largeur_chemin) // 10 # distance entre les capteurs gauche droite en pixels
-
 r = largeur_chemin # distance entre milieu entre les roues et milieu entre les capteurs gauche droite en pixels
-
-#z = (3 * largeur_chemin) // 2 # distance entre milieu entre les deux roues et capteur central, en pixel
-z = 2 * largeur_chemin
-
+z = (3 * largeur_chemin) // 2 # distance entre milieu entre les deux roues et capteur central, en pixel
+h = 3 * largeur_chemin // 2 + r # distance entre milieu entre les deux roues et milieu entre les capteurs exterieur droit et exterieur gauche en pixels
+i = (d * 3) // 2 # distance entre les capteurs exterieurs droits et exterieurs gauche en pixels
 coeff = 100
 vitesse_de_marche = pixel(0.2)
-choix = "droite"
+choix = "gauche"
 
-robot = Robot(image_roue, image_capteur, dimensions_image_roue, dimensions_image_capteur, l, d, r, z, vitesse_de_marche, coeff, largeur_chemin)
+robot = Robot(image_roue, image_capteur, dimensions_image_roue, dimensions_image_capteur, l, d, r, z, h, i, vitesse_de_marche, coeff, largeur_chemin)
 
 # placement initial du robot
 robot.placer(100, 500)
@@ -42,6 +39,8 @@ robot.roue_droite.image.set_colorkey((0,0,0))
 robot.capteur_interieur_droit.image.set_colorkey((255, 255, 255))
 robot.capteur_interieur_gauche.image.set_colorkey((255, 255, 255))
 robot.capteur_centre.image.set_colorkey((255, 255, 255))
+robot.capteur_exterieur_droit.image.set_colorkey((255, 255, 255))
+robot.capteur_exterieur_gauche.image.set_colorkey((255, 255, 255))
 
 
 continuer = True
@@ -84,6 +83,13 @@ while continuer: # boucle principale
 
     elif robot.capteur_interieur_droit.est_dans_le_noir() and not robot.capteur_interieur_gauche.est_dans_le_noir():
         robot.tourner_droite()
+
+    elif robot.capteur_interieur_gauche.est_dans_le_noir() and robot.capteur_exterieur_gauche.est_dans_le_noir() and\
+            robot.capteur_interieur_droit.est_dans_le_noir() and robot.capteur_exterieur_droit.est_dans_le_noir() and robot.capteur_centre.est_dans_le_noir():
+        robot.stop()
+
+    elif robot.capteur_interieur_gauche.est_dans_le_noir() and robot.capteur_interieur_droit.est_dans_le_noir() and robot.capteur_centre.est_dans_le_noir():
+        robot.gerer_intersection(choix)
 
     elif not robot.capteur_centre.est_dans_le_noir() and not robot.capteur_interieur_droit.est_dans_le_noir() and not robot.capteur_interieur_gauche.est_dans_le_noir() and not pas_demi_tour:
         pas_demi_tour = robot.demi_tour()
