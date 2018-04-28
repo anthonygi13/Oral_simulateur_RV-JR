@@ -11,7 +11,7 @@ from math import sin
 from conversions import *
 
 fenetre = pygame.display.set_mode((1800, 1000)) # fenetre utilisee en tant que variable globale
-fond = pygame.image.load("terrain3.png") # image d un chemin noir sur fond blanc, utilisee en tant que variable globale
+fond = pygame.image.load("terrain9.png") # image d un chemin noir sur fond blanc, utilisee en tant que variable globale
 
 class Image(): # classe permettant de manipuler plus aisement les images a afficher a l ecran
 

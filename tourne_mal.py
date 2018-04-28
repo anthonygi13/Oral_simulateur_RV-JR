@@ -20,8 +20,8 @@ largeur_chemin = 40
 
 l = 4 * largeur_chemin # distance entre les deux roues en pixels
 
-d = (12 * largeur_chemin) // 10 # distance entre les capteurs gauche droite en pixels
-#d = 2 * largeur_chemin
+#d = (12 * largeur_chemin) // 10 # distance entre les capteurs gauche droite en pixels
+d = 2 * largeur_chemin
 
 r = largeur_chemin # distance entre milieu entre les roues et milieu entre les capteurs gauche droite en pixels
 

@@ -11,7 +11,7 @@ from math import sin
 from conversions import *
 
 fenetre = pygame.display.set_mode((1800, 1000)) # fenetre utilisee en tant que variable globale
-fond = pygame.image.load("terrain5.png") # image d un chemin noir sur fond blanc, utilisee en tant que variable globale
+fond = pygame.image.load("terrain5_gif.gif") # image d un chemin noir sur fond blanc, utilisee en tant que variable globale
 
 class Image(): # classe permettant de manipuler plus aisement les images a afficher a l ecran
 
@@ -237,13 +237,15 @@ class Robot(): # classe permettant de gerer la simulation du comportement du rob
 
     def tourner_gauche(self): # change les vitesses des roues pour rectifier la trajectoire du robot vers la gauche
 
-        self.controle_moteur(0,
+        K = self.d / 2
+        self.controle_moteur(self.vitesse * self.coeff * (2 * K - self.l) / (2 * K + self.l),
                              self.vitesse * self.coeff)
 
     def tourner_droite(self): # change les vitesses des roues pour rectifier la trajectoire du robot vers la droite
 
+        K = self.d / 2
         self.controle_moteur(self.vitesse * self.coeff,
-                             0)
+                             self.vitesse * self.coeff * (2 * K - self.l) / (2 * K + self.l))
 
     def demi_tour(self): # fait faire un demi tour au robot tant que le capteur central ne detecte pas de noir
         """
