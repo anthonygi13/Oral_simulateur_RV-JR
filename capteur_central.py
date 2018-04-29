@@ -17,6 +17,7 @@ dimensions_image_capteur = (49, 49)
 
 # parametres
 largeur_chemin = 40
+
 l = 4 * largeur_chemin # distance entre les deux roues en pixels
 
 d = (12 * largeur_chemin) // 10 # distance entre les capteurs gauche droite en pixels
@@ -33,8 +34,8 @@ choix = "droite"
 robot = Robot(image_roue, image_capteur, dimensions_image_roue, dimensions_image_capteur, l, d, r, z, vitesse_de_marche, coeff, largeur_chemin)
 
 # placement initial du robot
-robot.placer(100, 500)
-robot.rotation(3 * 90)
+robot.placer(563, 567)
+robot.rotation(346)
 
 # rend le noir transparent sur les images correspondant aux roues et aux capteurs
 robot.roue_gauche.image.set_colorkey((0,0,0))
@@ -77,7 +78,7 @@ while continuer: # boucle principale
         robot.stop()
 
     elif rotation:
-        robot.rotation(10)
+        robot.rotation(3)
 
     elif robot.capteur_interieur_gauche.est_dans_le_noir() and not robot.capteur_interieur_droit.est_dans_le_noir():
         robot.tourner_gauche()
@@ -98,5 +99,6 @@ while continuer: # boucle principale
     pygame.display.flip()
 
     robot.mouvement(time.clock() - t_i) # deplacement du robot
+
 
 pygame.quit()

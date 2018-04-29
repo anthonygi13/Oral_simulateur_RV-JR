@@ -30,8 +30,8 @@ choix = "gauche"
 robot = Robot(image_roue, image_capteur, dimensions_image_roue, dimensions_image_capteur, l, d, r, z, h, i, vitesse_de_marche, coeff, largeur_chemin)
 
 # placement initial du robot
-robot.placer(100, 500)
-robot.rotation(3 * 90)
+robot.placer(1275, 387)
+robot.rotation(155)
 
 # rend le noir transparent sur les images correspondant aux roues et aux capteurs
 robot.roue_gauche.image.set_colorkey((0,0,0))
@@ -76,7 +76,7 @@ while continuer: # boucle principale
         robot.stop()
 
     elif rotation:
-        robot.rotation(10)
+        robot.rotation(3)
 
     elif robot.capteur_interieur_gauche.est_dans_le_noir() and not robot.capteur_interieur_droit.est_dans_le_noir():
         robot.tourner_gauche()

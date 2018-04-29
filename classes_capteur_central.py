@@ -157,7 +157,7 @@ class Robot(): # classe permettant de gerer la simulation du comportement du rob
         :param angle: valeur en degre de l angle dont on veut faire tourner le robot
         """
 
-        self.angle += angle
+        self.angle = (self.angle + angle) % 360
         x = self.coord.x
         y = self.coord.y
         self.roue_droite.placer_centre(int(x + self.l / 2 * cos(radian(self.angle))),

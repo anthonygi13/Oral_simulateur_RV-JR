@@ -11,7 +11,7 @@ from math import sin
 from conversions import *
 
 fenetre = pygame.display.set_mode((1800, 1000)) # fenetre utilisee en tant que variable globale
-fond = pygame.image.load("terrain8.png") # image d un chemin noir sur fond blanc, utilisee en tant que variable globale
+fond = pygame.image.load("terrain9_gif.gif") # image d un chemin noir sur fond blanc, utilisee en tant que variable globale
 
 class Image(): # classe permettant de manipuler plus aisement les images a afficher a l ecran
 
@@ -151,7 +151,7 @@ class Robot(): # classe permettant de gerer la simulation du comportement du rob
         :param angle: valeur en degre de l angle dont on veut faire tourner le robot
         """
 
-        self.angle += angle
+        self.angle = (self.angle + angle) % 360
         x = self.coord.x
         y = self.coord.y
         self.roue_droite.placer_centre(int(x + self.l / 2 * cos(radian(self.angle))),
@@ -224,11 +224,11 @@ class Robot(): # classe permettant de gerer la simulation du comportement du rob
 
     def tourner_gauche(self): # change les vitesses des roues pour rectifier la trajectoire du robot vers la gauche
 
-        self.controle_moteur(-self.vitesse * self.coeff, self.vitesse * self.coeff)
+        self.controle_moteur(0, self.vitesse * self.coeff)
 
     def tourner_droite(self): # change les vitesses des roues pour rectifier la trajectoire du robot vers la droite
 
-        self.controle_moteur(self.vitesse * self.coeff, -self.vitesse * self.coeff)
+        self.controle_moteur(self.vitesse * self.coeff, 0)
 
 
     def tout_droit(self): # change les vitesses des roues pour que le robot aille tout droit a la vitesse self.vitesse
