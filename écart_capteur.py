@@ -22,8 +22,8 @@ l = 4 * largeur_chemin # distance entre les deux roues en pixels
 
 d = (12 * largeur_chemin) // 10 # distance entre les capteurs gauche droite en pixels
 
-r = largeur_chemin # distance entre milieu entre les roues et milieu entre les capteurs gauche droite en pixels
-#r = 0
+#r = largeur_chemin # distance entre milieu entre les roues et milieu entre les capteurs gauche droite en pixels
+r = 0
 #r = 2 * largeur_chemin
 
 coeff = 100
@@ -33,8 +33,8 @@ choix = "droite"
 robot = Robot(image_roue, image_capteur, dimensions_image_roue, dimensions_image_capteur, l, d, r, vitesse_de_marche, coeff, largeur_chemin)
 
 # placement initial du robot
-robot.placer(663, 432)
-robot.rotation(277)
+robot.placer(792, 384)
+robot.rotation(274)
 
 # rend le noir transparent sur les images correspondant aux roues et aux capteurs
 robot.roue_gauche.image.set_colorkey((0,0,0))
